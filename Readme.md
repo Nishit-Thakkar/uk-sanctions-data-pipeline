@@ -153,13 +153,14 @@ The cleaned file contains **15 columns**, categorized by how they should be util
 | Aliases | 46.3% |
 | Positions_Titles | 43.7% |
 | Passport_Numbers | 9.4% |
+| National_IDs  | 6.2% |
 | IMO_Numbers | 10.4% |
 
 **Note:** This sparsity is inherent to the source data, not a cleaning failure. Screening logic must accommodate partial matches.
 
 ## Key Design Decisions
 
-**Name splitting (Primary vs Alias):** The script isolates the `Primary Name` row for each entity as the canonical match name. All other name rows — including variations and aliases — are collapsed into `Aliases`. This is important because a fuzzy matcher should weight a hit on the primary name more heavily than a hit on an alias.
+**Name splitting (Primary vs Alias):** The script isolates the `Primary Name` row for each entity as the canonical match name. All other name rows including variations and aliases are collapsed into `Aliases`. This is important because a fuzzy matcher should weight a hit on the primary name more heavily than a hit on an alias.
 
 **Country consolidation:** Three separate country fields (`Address Country`, `Nationality(/ies)`, `Country of birth`) are merged into a single `Associated_Countries` field. In practice, an individual may appear with only one of these populated — consolidating them maximises the chance of a geographic match against customer records.
 
